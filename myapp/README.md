@@ -1,5 +1,4 @@
 # Using
-================================================
 
     - AngularJs
     - ExpressJs
@@ -13,7 +12,6 @@ Run this command to generate npm_modules
 This will generate a folder called npm_modules
 
 # Database
-================================================
 
 The application uses MongoDB. Run the following command to access the database
 
