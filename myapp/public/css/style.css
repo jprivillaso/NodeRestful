@@ -1,6 +1,9 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+body, html{
+    padding: 0px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 a {
@@ -20,48 +23,23 @@ a {
   color: #00B7FF;
 }
 
-#wrapper {
-    padding-left:312px;
-    position:relative;
+body{
+    background: url("/images/homeBackground.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
-#userList {
-    margin:0 0 30px 0;
+/********** LOGIN SECTION **************/
+#loginSection{
+    color: #ADD8E6;
+    width: 200px;
+    position: absolute;
+    left: 45%;
+    top: 30%;
 }
-    #userList table {
-        border-collapse:separate;
-        border-spacing:1px;
-        background:#CCC;
-    }
-        #userList table th {
-            background:#EEE;
-            font-weight:600;
-            padding:10px 20px;
-            text-align:center;
-        }
-        #userList table tbody {
-            padding:0; margin:0;
-            border-collapse:collapse;
-            border-spacing:0px;
-        }
-            #userList table td {
-                background:#FFF;
-                padding:5px 10px;
-                text-align:center;
-            }
 
-#userInfo {
-    width:250px;
-    position:absolute;
-    top:0; left:0;
-}
-    #userInfo p {
-        padding:15px;
-        border:1px solid #CCC;
-        background:rgba(80,120,255,0.05);
-    }
-
-fieldset {
-    border:0;
-    padding:0; margin:0;
+#loginButton{
+  margin-top: 10px;
 }
