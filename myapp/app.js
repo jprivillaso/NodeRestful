@@ -12,6 +12,7 @@ var db = monk('localhost:27017/restfulNodeApp');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var auth = require('./app/authenticationUtils');
 
 var app = express();
 // view engine setup
