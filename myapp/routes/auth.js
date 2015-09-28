@@ -1,33 +1,42 @@
-// var express = require('express');
-// var router  = express.Router();
+var express  = require('express');
+var jwt = require('jsonwebtoken');
+var app = express();
+// ---------------------------------------------------------
+// authentication (no middleware necessary since this isnt authenticated)
+// ---------------------------------------------------------
+// http://localhost:8080/api/authenticate
+app.post('/', function(req, res) {
 
-// var jwt     = require('jsonwebtoken');
-// var app     = express();
+  console.log("authenticating");
 
-// /* Authentication  */
-// router.post('/authenticate', function(req, res) {
+  var user = {
+    password: req.body.password
+  }
 
-//   var name = req.body.user;
-//   var pass = req.body.password;
+  if (!user) {
+    res.json({ success: false, message: 'Authentication failed. User not found.' });
+  } else if (user) {
 
-//   if (name === "juan" && pass === "123") {
+    // check if password matches
+    if (user.password != req.body.password) {
+      res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+    } else {
 
-//     var token = jwt.sign("juan", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1NDY1MDViMDFmYTAzYmUwMTUxMDYwOWIiLCJuYW1lIjoiTmljayBDZXJtaW5hcmEiLCJwYXNzd29yZCI6InBhc3N3b3JkIiwiYWRtaW4iOnRydWUsIl9fdiI6MH0.ah-NFQ1967WVeN6lYNAahT7hZtshG6kw6AW3ncuJOYw", {
-//       expiresInMinutes: 1440 // expires in 24 hours
-//     });
+      // if user is found and password is right
+      // create a token
+      var token = jwt.sign(user, app.get('superSecret'), {
+        expiresInMinutes: 15 // expires in 24 hours
+      });
 
-//     app.set('superSecret', token); // sec
-//     console.log("User authenticated successfully");
-//     res.status(500).json({token: token});
+      res.json({
+        success: true,
+        message: 'Enjoy your token!',
+        token: token
+      });
+    }   
 
-//   } else {
+  }
 
-//     console.error("Invalid login data");
-//     res.status(400).send("Invalid login data");
+});
 
-//   }
-
-// });
-
-// module.exports = router;
-// module.exports = app;
+module.exports = app;
