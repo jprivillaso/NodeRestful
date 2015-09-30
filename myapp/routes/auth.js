@@ -2,7 +2,7 @@ var express  = require('express');
 var jwt = require('jsonwebtoken');
 var app = express();
 // ---------------------------------------------------------
-// authentication (no middleware necessary since this isnt authenticated)
+// authentication (Open web service to authenticate the user)
 // ---------------------------------------------------------
 // http://localhost:8080/api/authenticate
 app.post('/', function(req, res) {
@@ -20,7 +20,7 @@ app.post('/', function(req, res) {
       if (docs && docs.length > 0) {
 
         var user = docs[0];
-        
+
         if (!user) {
           res.json({ success: false, message: 'Authentication failed. User not found.' });
         } else if (user) {

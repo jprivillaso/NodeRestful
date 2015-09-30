@@ -1,3 +1,4 @@
+// Required scripts
 var express       = require('express');
 var path          = require('path');
 var favicon       = require('serve-favicon');
@@ -11,6 +12,7 @@ var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk('localhost:27017/restApp');
 
+// Routes
 var indexRoute = require('./routes/index'); 
 var usersRoute = require('./routes/users');
 var authRoute = require('./routes/auth');
@@ -22,10 +24,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-var config = require('./config'); // get our config file
-app.set('superSecret', config.secret); // secret variable
+var config = require('./config');
+app.set('superSecret', config.secret); // this will store the token
 
-// uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -33,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-/* GET home page. */
+/* GET home page */
 app.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
@@ -44,13 +45,15 @@ app.use(function(req,res,next){
 });
 
 // ---------------------------------------------------------
-// get an instance of the router for api routes
+// Get an instance of the router for api routes
 // ---------------------------------------------------------
 var apiRoutes = express.Router();
 app.use('/api/core/auth', authRoute);
 
 // ---------------------------------------------------------
-// route middleware to authenticate and check token
+// Every following route will pass by that code and will try 
+// to authenticate with a token sent via request body or request
+// header
 // ---------------------------------------------------------
 apiRoutes.use(function(req, res, next) {
 
@@ -84,7 +87,7 @@ apiRoutes.use(function(req, res, next) {
 });
 
 // ---------------------------------------------------------
-// authenticated routes
+// Authenticated routes
 // ---------------------------------------------------------
 apiRoutes.get('/', function(req, res) {
   res.json({ message: 'Welcome to the coolest API on earth!' });
@@ -92,4 +95,5 @@ apiRoutes.get('/', function(req, res) {
 
 app.use('/api/core/users', usersRoute);
 app.use('/api', apiRoutes); 
+
 module.exports = app;
