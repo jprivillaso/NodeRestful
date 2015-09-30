@@ -7,34 +7,50 @@ var app = express();
 // http://localhost:8080/api/authenticate
 app.post('/', function(req, res) {
 
-  console.log("authenticating");
+  var username = req.body.username;
+  var password = req.body.password;
 
-  var user = {
-    password: req.body.password
-  }
+  if (username && password) {
 
-  if (!user) {
-    res.json({ success: false, message: 'Authentication failed. User not found.' });
-  } else if (user) {
+    var db = req.db;
+    var collection = db.get('userlist');
 
-    // check if password matches
-    if (user.password != req.body.password) {
-      res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-    } else {
+    collection.find({username: username, password: 123}, {}, function(e,docs){
 
-      // if user is found and password is right
-      // create a token
-      var token = jwt.sign(user, app.get('superSecret'), {
-        expiresInMinutes: 15 // expires in 24 hours
-      });
+      if (docs && docs.length > 0) {
 
-      res.json({
-        success: true,
-        message: 'Enjoy your token!',
-        token: token
-      });
-    }   
+        var user = docs[0];
+        
+        if (!user) {
+          res.json({ success: false, message: 'Authentication failed. User not found.' });
+        } else if (user) {
 
+          // check if password matches
+          if (user.password != password) {
+            res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+          } else {
+
+            // if user is found and password is right
+            // create a token
+            var token = jwt.sign(user, app.get('superSecret'), {
+              expiresInMinutes: 15 // expires in 24 hours
+            });
+
+            res.json({
+              success: true,
+              message: 'Enjoy your token!',
+              token: token
+            });
+          }   
+
+        }
+
+      }
+
+    });
+
+  } else {
+    res.json({ success: false, message: 'Authentication failed. Parameters missing' });
   }
 
 });

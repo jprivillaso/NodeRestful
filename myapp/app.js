@@ -9,7 +9,7 @@ var jwt           = require('jsonwebtoken');
 // Database
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/restfulNodeApp');
+var db = monk('localhost:27017/restApp');
 
 var indexRoute = require('./routes/index'); 
 var usersRoute = require('./routes/users');
@@ -38,19 +38,21 @@ app.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
+
 // ---------------------------------------------------------
 // get an instance of the router for api routes
 // ---------------------------------------------------------
 var apiRoutes = express.Router();
-
 app.use('/api/core/auth', authRoute);
 
 // ---------------------------------------------------------
 // route middleware to authenticate and check token
 // ---------------------------------------------------------
 apiRoutes.use(function(req, res, next) {
-
-  console.log("middleware say hi");
 
   // check header or url parameters or post parameters for token
   var token = req.body.token || req.headers['x-access-token'];
