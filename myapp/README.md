@@ -17,7 +17,6 @@ The application uses MongoDB. Run the following command to access the database
 
     mongod --dbpath projectPath\data
 
-And then start Mongo at the bin folder. Example C:\mongon\bin\
+And then start Mongo at the bin folder. Example C:\Mongo\bin\
 
-    mongod --dbpath c:\node\nodetest2\data
     mongo
