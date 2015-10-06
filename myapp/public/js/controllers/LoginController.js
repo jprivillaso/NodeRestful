@@ -2,15 +2,26 @@ app.controller("LoginController", ['$scope', '$location', '$http', function($sco
     $scope.go = function ( path ) {
 
       var data = {
-        user: "juan",
-        password: "123"
+        username: $scope.username,
+        password: $scope.password
       };
 
-      $http.post("http://localhost:3000/auth/authenticate", data).done(function(data){
-        $location.path( path );
+      console.log(data);
+
+      $http.post("http://localhost:3000/api/core/auth", data).success(function(data){
+
+        if (data.sucess && data.token) {
+          $location.path( path );
+          console.log("Authenticated successfully");
+        }
+
+        console.log(data);
+
       }).error(function(err){
+        console.log("error");
         console.log(err);
       });
 
     };
+
 }]);

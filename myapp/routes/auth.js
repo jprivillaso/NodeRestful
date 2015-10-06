@@ -15,7 +15,7 @@ app.post('/', function(req, res) {
     var db = req.db;
     var collection = db.get('userlist');
 
-    collection.find({username: username, password: 123}, {}, function(e,docs){
+    collection.find({username: username, password: password}, {}, function(e,docs){
 
       if (docs && docs.length > 0) {
 
@@ -36,6 +36,7 @@ app.post('/', function(req, res) {
               expiresInMinutes: 15 // expires in 24 hours
             });
 
+            res.status(200);
             res.json({
               success: true,
               message: 'Enjoy your token!',
@@ -45,11 +46,15 @@ app.post('/', function(req, res) {
 
         }
 
+      } else {
+        res.status(500);
+        res.json({ success: false, message: 'Authentication failed. No user found' });
       }
 
     });
 
   } else {
+    res.status(400);
     res.json({ success: false, message: 'Authentication failed. Parameters missing' });
   }
 
