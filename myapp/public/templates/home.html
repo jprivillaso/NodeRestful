@@ -2,7 +2,10 @@
     <div class="mainContainer" ng-controller="MainController">
         <h1>{{ title }} This is my WebApp with views</h1>
     </div>
-
+    <div id="usersFilter" ng-controller="HomeController">
+        <h3>Select a Gender to display {{title}} </h3>
+       <select ng-options="item.id as item.label for item in genderList track by item.id" ng-change="changeGender()" ng-model="selected"></select>
+    </div>
     <div class="usersSections" ng-controller="UserController">
         <table class="table">
             <thead>
