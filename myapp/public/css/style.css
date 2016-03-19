@@ -1,44 +1,36 @@
-body, html{
-    padding: 0px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+body, html {
+  padding: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; }
 
 h2 {
-    margin:0 0 .5em 0;
-}
+  margin: 0 0 .5em 0; }
 
-.mainContainer, 
-.view{
+.mainContainer,
+.view {
   width: 100%;
-  height: 100%;
-}
+  height: 100%; }
 
 /********** LOGIN SECTION **************/
-#loginMainContainer{
-    background: url("/images/homeBackground.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-}
+#loginMainContainer {
+  background: url("/images/homeBackground.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: 100%; }
 
-#loginSection{
-    width: 200px;
-    position: absolute;
-    left: 45%;
-    top: 30%;
-}
+#loginSection {
+  width: 200px;
+  position: absolute;
+  left: 45%;
+  top: 30%; }
 
 #loginSection p {
-  color: #ADD8E6;
-}
+  color: #ADD8E6; }
 
-#loginButton{
-  margin-top: 10px;
-}
+#loginButton {
+  margin-top: 10px; }

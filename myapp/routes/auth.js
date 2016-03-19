@@ -20,7 +20,7 @@ app.post('/', function(req, res) {
       if (docs && docs.length > 0) {
 
         var user = docs[0];
-
+        
         if (!user) {
           res.json({ success: false, message: 'Authentication failed. User not found.' });
         } else if (user) {
