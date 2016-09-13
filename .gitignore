@@ -1,3 +1,3 @@
-myapp/node_modules
-myapp/data
+node_modules
+data
 npm-debug.log

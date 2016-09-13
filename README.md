@@ -1,4 +1,22 @@
-# NodeRestful
-This repository contains a simple RestFul WebApp made with NodeJs, AngularJs, ExpressJs and MongoDB.
-The idea is to show how to create a simple RestFul application with open and protected web services.
-The application uses Token Based Authentication that expires after 15 minutes
+# Stack Used
+
+    - AngularJs
+    - ExpressJs
+    - NodeJs
+    - MongoDb
+
+# Installation
+
+The application uses MongoDB. Run the following command to access the database
+The following are the information required for the database:
+
+    - Database name: restApp
+    - Collection name: userlist
+
+Create a single user to test the application
+
+    db.userList.insert(user: 'username', password: 'mypasswd');
+
+Run this command to install the dependencies
+
+    npm install
