@@ -12,7 +12,7 @@ app.controller("HomeController", ['$scope', function($scope){
 	$scope.selected = 'Male';
 
 	$scope.changeGender = function() {
-		alert("uhu");
+		console.log("changed gender")
 	};
 
 }]);

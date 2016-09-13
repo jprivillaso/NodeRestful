@@ -14,9 +14,11 @@ This will generate a folder called npm_modules
 # Database
 
 The application uses MongoDB. Run the following command to access the database
+The following are the information required for the database:
 
-    mongod --dbpath projectPath\data
+    - Database name: restApp
+    - Collection name: userlist
 
-And then start Mongo at the bin folder. Example C:\Mongo\bin\
+Create a single user to test the application
 
-    mongo
+    db.userList.insert(user: 'username', password: 'mypasswd');

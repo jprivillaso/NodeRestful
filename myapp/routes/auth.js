@@ -13,14 +13,17 @@ app.post('/', function(req, res) {
   if (username && password) {
 
     var db = req.db;
-    var collection = db.get('userlist');
+    var collection = db.get('userList');
 
-    collection.find({username: username, password: password}, {}, function(e,docs){
+    collection.find({user: username, password: password}, {}, function(e,docs){
+
+      console.log(username, password);
+      console.log(docs);
 
       if (docs && docs.length > 0) {
 
         var user = docs[0];
-        
+
         if (!user) {
           res.json({ success: false, message: 'Authentication failed. User not found.' });
         } else if (user) {
@@ -42,7 +45,7 @@ app.post('/', function(req, res) {
               message: 'Enjoy your token!',
               token: token
             });
-          }   
+          }
 
         }
 
